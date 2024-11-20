@@ -47,7 +47,7 @@
             @csrf
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" name="usernametk" required>
+                <input type="text" class="form-control" name="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -55,7 +55,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
-        <p class="message">Don't have an account? <a href="">Register</a></p>
+        <p class="message">Back to <a href="">Home page</a></p>
     </div>
 </body>
 </html>
