@@ -16,7 +16,7 @@
                             </a>
                             <div class="collapse" id="collapseDepartment" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('manage-department') }}">Manage Departments</a><!--inside this add department pop up form should include-->
+                                    <a class="nav-link" href="{{ route('departments.index') }}">Manage Departments</a><!--inside this add department pop up form should include-->
                                 </nav>
                             </div>
                             <!--Employees-->

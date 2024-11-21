@@ -1,30 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Department</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Add Department</h1>
-        <form action="{{ route('departments.store') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label for="dep_name" class="form-label">Department Name</label>
-                <input type="text" class="form-control" id="dep_name" name="dep_name" required>
+@extends('layouts.admin')
+ 
+@section('title','Manage Departments')
+
+@section('content')
+
+<h1 class="mt-4">Manage Departments</h1>
+    <ol class="breadcrumb mb-4">
+         <li class="breadcrumb-item active">Department details</li>
+    </ol>
+   
+<!-- total departments and add department button-->
+<div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Total Departments</h1>
+            <a href="{{ route('departments.create') }}" class="btn btn-primary">Add Department</a>
+        </div>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-            <div class="mb-3">
-                <label for="designation" class="form-label">Designation</label>
-                <input type="text" class="form-control" id="designation" name="designation" required>
-            </div>
-            <div class="mb-3">
-                <label for="no_of_employees" class="form-label">Number of Employees</label>
-                <input type="number" class="form-control" id="no_of_employees" name="no_of_employees" required min="0">
-            </div>
-            <button type="submit" class="btn btn-primary">Add Department</button>
-        </form>
-    </div>
-</body>
-</html>
+        @endif
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Dep ID</th>
+                    <th>Dep Name</th>
+                    <th>Designation</th>
+                    <th>No. of Employees</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($departments as $department)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $department->dep_id }}</td>
+                        <td>{{ $department->dep_name }}</td>
+                        <td>{{ $department->designation }}</td>
+                        <td>{{ $department->no_of_employees }}</td>
+                        <td>
+                        <form action="{{ route('departments.destroy', $department->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+</div>
+
+@endsection

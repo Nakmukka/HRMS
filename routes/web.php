@@ -35,14 +35,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //departments
-//manage dep
-    Route::get('contents/departments/manage-department',function(){
-        return view('contents.departments.manage-department');
-    })->name('manage-department');
-//add department
-    Route::get('contents/departments/add-department',function(){
-        return view('contents.departments.add-department');
-    })->name('add-department');
+
 
 // Route to display all departments
 Route::get('contents/departments', [DepartmentController::class, 'index'])->name('departments.index');
@@ -53,6 +46,14 @@ Route::get('contents/departments/create', [DepartmentController::class, 'create'
 // Route to store a new department
 Route::post('contents/departments', [DepartmentController::class, 'store'])->name('departments.store');
 
+// Route to display the form for editing an existing department
+Route::get('/departments/{id}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
+
+// Route to update an existing department
+Route::put('/departments/{id}', [DepartmentController::class, 'update'])->name('departments.update');
+
+// Route to delete a department
+Route::delete('contents/departments/{id}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
 
 
 require __DIR__.'/admin.php';
