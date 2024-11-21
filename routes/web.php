@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DepartmentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +33,26 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//departments
+//manage dep
+    Route::get('contents/departments/manage-department',function(){
+        return view('contents.departments.manage-department');
+    })->name('manage-department');
+//add department
+    Route::get('contents/departments/add-department',function(){
+        return view('contents.departments.add-department');
+    })->name('add-department');
+
+// Route to display all departments
+Route::get('contents/departments', [DepartmentController::class, 'index'])->name('departments.index');
+
+// Route to display the form for creating a new department
+Route::get('contents/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
+
+// Route to store a new department
+Route::post('contents/departments', [DepartmentController::class, 'store'])->name('departments.store');
+
 
 
 require __DIR__.'/admin.php';
